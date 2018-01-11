@@ -1,0 +1,19 @@
+version: '2'
+services:
+    testreactwithscss-app:
+        image: testreactwithscss
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://testreactwithscss-postgresql:5432/testReactWithScss
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=testreactwithscss-elasticsearch:9300
+        ports:
+            - 8080:8080
+    testreactwithscss-postgresql:
+        extends:
+            file: postgresql.yml
+            service: testreactwithscss-postgresql
+    testreactwithscss-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: testreactwithscss-elasticsearch
